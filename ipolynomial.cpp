@@ -151,9 +151,9 @@ ipoly operator * (const int &x,const ipoly &A)
 {
 	return A*x;
 }
-ostream& operator << (ostream& os,ipoly &A)
+ostream& operator << (ostream& os,const ipoly &A)
 {
 	for(int i=0;i<(int)A.size();i++)
-		os<<(A[i]=((A[i]+MOD)%MOD))<<" ";
+		os<<(((A[i]+MOD)%MOD))<<" ";
 	return os;
 }

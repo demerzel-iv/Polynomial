@@ -15,14 +15,15 @@ const int MOD = 998244353; //should be suitable for NTT;
 
 template<> class poly<int>
 {
-	static int qpow(int x,int y);
-	static int inv(int x);
 	static void ntt(int *y,int n,int sig); //n should be equal to 2^k 
 
 	unsigned int siz;
 	int* s;
 
 public:
+
+	static int qpow(int x,int y);
+	static int inv(int x);
 
 #ifdef _DEBUG
 	void debug()
@@ -56,7 +57,7 @@ public:
 	friend ipoly operator * (const ipoly &A,const int &x);
 	friend ipoly operator * (const int &x,const ipoly &A);
 
-	friend ostream& operator << (ostream& os,ipoly &A);
+	friend ostream& operator << (ostream& os,const ipoly &A);
 };
 
 bool operator < (const ipoly &A,const ipoly &B) = delete; 
