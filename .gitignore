@@ -1,5 +1,4 @@
 main
-test.cpp
 test*
 *.o
 save
