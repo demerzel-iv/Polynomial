@@ -3,3 +3,4 @@ test.cpp
 test*
 *.o
 save
+*.swp

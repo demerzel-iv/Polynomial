@@ -1,5 +1,6 @@
 #pragma once
 #include<bits/stdc++.h>
+#include "templatepoly.h"
 
 using std::ostream;
 using std::initializer_list;
@@ -7,10 +8,12 @@ using std::initializer_list;
 using std::swap;
 using std::max;
 
+typedef poly<int> ipoly;
+
 typedef long long ll;
 const int MOD = 998244353; //should be suitable for NTT;
 
-class poly
+template<> class poly<int>
 {
 	static int qpow(int x,int y);
 	static int inv(int x);
@@ -37,35 +40,35 @@ public:
 	poly(const initializer_list<int> &S);
 	template<typename inputIterator> poly(inputIterator begin,inputIterator end);
 
-	poly(const poly &A);
-	poly(poly &&A);
-	poly& operator = (const poly &A);
-	poly& operator = (poly &&A);
+	poly(const ipoly &A);
+	poly(ipoly &&A);
+	poly& operator = (const ipoly &A);
+	poly& operator = (ipoly &&A);
 
 	~poly(){}
 
-	friend bool operator == (const poly &A,const poly &B);
+	friend bool operator == (const ipoly &A,const ipoly &B);
 
-	friend poly operator + (const poly &A,const poly &B);
-	friend poly operator - (const poly &A,const poly &B);
-	friend poly operator * (const poly &A,const poly &B);
+	friend ipoly operator + (const ipoly &A,const ipoly &B);
+	friend ipoly operator - (const ipoly &A,const ipoly &B);
+	friend ipoly operator * (const ipoly &A,const ipoly &B);
 
-	friend poly operator * (const poly &A,const int &x);
-	friend poly operator * (const int &x,const poly &A);
+	friend ipoly operator * (const ipoly &A,const int &x);
+	friend ipoly operator * (const int &x,const ipoly &A);
 
-	friend ostream& operator << (ostream& os,poly &A);
+	friend ostream& operator << (ostream& os,ipoly &A);
 };
 
-bool operator < (const poly &A,const poly &B) = delete; 
-bool operator > (const poly &A,const poly &B) = delete;
-bool operator <= (const poly &A,const poly &B) = delete;
-bool operator >= (const poly &A,const poly &B) = delete;
-poly operator + (const poly &A,const int &B) = delete;
-poly operator + (const int &A,const poly &B) = delete;
-poly operator - (const poly &A,const int &B) = delete;
-poly operator - (const int &A,const poly &B) = delete;
+bool operator < (const ipoly &A,const ipoly &B) = delete; 
+bool operator > (const ipoly &A,const ipoly &B) = delete;
+bool operator <= (const ipoly &A,const ipoly &B) = delete;
+bool operator >= (const ipoly &A,const ipoly &B) = delete;
+ipoly operator + (const ipoly &A,const int &B) = delete;
+ipoly operator + (const int &A,const ipoly &B) = delete;
+ipoly operator - (const ipoly &A,const int &B) = delete;
+ipoly operator - (const int &A,const ipoly &B) = delete;
 
-template<typename inputIterator> poly::poly(inputIterator begin,inputIterator end)
+template<typename inputIterator> ipoly::poly(inputIterator begin,inputIterator end)
 {
 	siz=end-begin;
 	s=new int[siz];
@@ -73,18 +76,18 @@ template<typename inputIterator> poly::poly(inputIterator begin,inputIterator en
 		s[i]=*begin,begin++;
 }
 
-int poly::qpow(int x,int y)
+int ipoly::qpow(int x,int y)
 {
 	int z=1;
 	for(;y;y>>=1,x=(ll)x*x%MOD)
 		if(y&1)z=(ll)z*x%MOD;
 	return z;
 }
-int poly::inv(int x)
+int ipoly::inv(int x)
 {
 	return x==1?x:(-(MOD/x)*(ll)inv(MOD%x)%MOD);
 }
-void poly::ntt(int *y,int n,int sig)
+void ipoly::ntt(int *y,int n,int sig)
 {
 	static std::vector<int> rev;
 	if((int)rev.size()!=n)
@@ -115,7 +118,7 @@ void poly::ntt(int *y,int n,int sig)
 	}
 }
 
-poly::poly(const poly &A)
+ipoly::poly(const ipoly&A)
 {
 #ifdef _DEBUG
 	printf("copy construction\n");
@@ -124,7 +127,7 @@ poly::poly(const poly &A)
 	for(int i=0;i<=(int)siz;i++)
 		s[i]=A[i];
 }
-poly::poly(poly &&A)
+ipoly::poly(ipoly &&A)
 {
 #ifdef _DEBUG
 	printf("move construction\n");
@@ -132,7 +135,7 @@ poly::poly(poly &&A)
 	s=A.s;
 	siz=A.siz;
 }
-poly& poly::operator = (const poly &A)
+ipoly& ipoly::operator = (const ipoly &A)
 {
 #ifdef _DEBUG
 	printf("copy assignment\n");
@@ -142,7 +145,7 @@ poly& poly::operator = (const poly &A)
 		s[i]=A[i];
 	return *this;
 }
-poly& poly::operator = (poly &&A)
+ipoly& ipoly::operator = (ipoly &&A)
 {
 #ifdef _DEBUG
 	printf("move assignment\n");
@@ -152,46 +155,46 @@ poly& poly::operator = (poly &&A)
 	return *this;
 }
 
-poly::poly(int length):siz(length)
+ipoly::poly(int length):siz(length)
 {
 	s=new int[siz];
 	for(int i=0;i<(int)siz;i++) s[i]=0;
 }
-poly::poly(const initializer_list<int> &S)
+ipoly::poly(const initializer_list<int> &S)
 {
 	s=new int[siz=S.size()];
 	int i=0;
 	for(auto x:S) s[i++] = x;
 }
 
-bool operator == (const poly &A,const poly &B)
+bool operator == (const ipoly &A,const ipoly &B)
 {
 	if(A.size()!=B.size())return 0;
 	for(int i=0;i<(int)A.size();i++)
 		if(A[i]!=B[i])return 0;
 	return 1;
 }
-poly operator + (const poly &A,const poly &B)
+ipoly operator + (const ipoly &A,const ipoly &B)
 {
-	poly ret(max(A.size(),B.size()));
+	ipoly ret(max(A.size(),B.size()));
 	for(int i=0;i<(int)A.size();i++)
 		ret[i]=A[i];
 	for(int i=0;i<(int)B.size();i++)
 		ret[i]=((ll)ret[i]+B[i])%MOD;
 	return ret;
 }
-poly operator - (const poly &A,const poly &B)
+ipoly operator - (const ipoly &A,const ipoly &B)
 {
-	poly ret(max(A.size(),B.size()));
+	ipoly ret(max(A.size(),B.size()));
 	for(int i=0;i<(int)A.size();i++)
 		ret[i]=A[i];
 	for(int i=0;i<(int)B.size();i++)
 		ret[i]=((ll)ret[i]-B[i])%MOD;
 	return ret;
 }
-poly operator * (const poly &A,const poly &B)
+ipoly operator * (const ipoly &A,const ipoly &B)
 {
-	poly C(A.size()+B.size()-1);
+	ipoly C(A.size()+B.size()-1);
 
 	int n=1;
 	while(n<=(int)C.size())n<<=1;
@@ -200,11 +203,11 @@ poly operator * (const poly &A,const poly &B)
 	for(int i=0;i<n;i++)
 		u[i]=A[i],v[i]=B[i];
 
-	poly::ntt(u,n,1),poly::ntt(v,n,1);
+	ipoly::ntt(u,n,1),ipoly::ntt(v,n,1);
 	for(int i=0;i<n;i++) u[i]=(ll)u[i]*v[i]%MOD;
-	poly::ntt(u,n,-1);
+	ipoly::ntt(u,n,-1);
 
-	int dn=poly::inv(n);
+	int dn=ipoly::inv(n);
 	for(int i=0;i<(int)C.size();i++)
 		C[i]=(ll)u[i]*dn%MOD;
 
@@ -213,18 +216,18 @@ poly operator * (const poly &A,const poly &B)
 
 	return C;
 }
-poly operator * (const poly &A,const int &x)
+ipoly operator * (const ipoly &A,const int &x)
 {
-	poly B(A.size());
+	ipoly B(A.size());
 	for(int i=0;i<(int)B.size();i++)
 		B[i]=(ll)A[i]*x%MOD;
 	return B;
 }
-poly operator * (const int &x,const poly &A)
+ipoly operator * (const int &x,const ipoly &A)
 {
 	return A*x;
 }
-ostream& operator << (ostream& os,poly &A)
+ostream& operator << (ostream& os,ipoly &A)
 {
 	for(int i=0;i<(int)A.size();i++)
 		os<<(A[i]=((A[i]+MOD)%MOD))<<" ";
