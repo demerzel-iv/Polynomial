@@ -43,6 +43,7 @@ public:
 		value=A.value;
 		return *this;
 	}
+	element origin();
 	ostream& operator << (ostream& os, const element &A);
 	void setint(int x=0)
 	{
@@ -68,8 +69,12 @@ element operator * (const element &A,const element &B){
 element operator / (const element &A,const element &B){
 	return element(A.value->devide(A.value,B.value));
 }
-element inv(const element &A){
+element::element inv(const element &A){
 	return element(A.value->inv());
+}
+element::element origin()
+{
+	return element(A.value->origin());
 }
 ostream& operator << (ostream& os, const element &A){
 	if(A.value->type()==typei)
