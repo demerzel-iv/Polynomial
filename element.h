@@ -4,6 +4,8 @@
 #include "Image.h"
 #include <iostream>
 using std::ostream;
+using std::cout;
+using std::endl;
 class element{
 private:
 	temps* value;
@@ -14,11 +16,12 @@ public:
 	element(double r,double i):value(static_cast<temps*>(new Image(r,i))){}
 
 	element(temps* v):value(v){}
-	element(const element &A):value(A.value->v()){}
+	element(const element &A){value=A.value->v();}
 	element(element &&A)
 	{
-		if(value!=nullptr) delete value;
+		if(value!=nullptr&&value!=A.value) delete value;
 		value=A.value;
+		A.value=nullptr;
 	}
 
 	friend element operator + (const element &A,const element &B);
@@ -44,8 +47,9 @@ public:
 	}
 	element& operator = (element &&A)
 	{
-		if(value!=nullptr) delete value;
+		if(value!=nullptr&&value!=A.value) delete value;
 		value=A.value;
+		A.value=nullptr;
 		return *this;
 	}
 	element& operator = (const int &A)
