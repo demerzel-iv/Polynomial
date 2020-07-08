@@ -1,10 +1,6 @@
 main
-te
 *.o
 *.swp
-<<<<<<< Updated upstream
-save*
-=======
 .vscode
 save*
->>>>>>> Stashed changes
+test*
