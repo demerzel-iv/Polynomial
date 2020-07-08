@@ -1,13 +1,16 @@
 #pragma once
 #include "temps.h"
-class Int:public temps{
-	static const int MOD=998244353;
-	static const int g=3;
-	int x;
-public:
-	Int(int X=0):temps(),x(X){}
+#include<cmath>
 
-	int qpow(int v,int y)const;
+using std::acos;
+using std::sin;
+using std::cos;
+const double pi=acos(-1.0);
+class Image:public temps{
+	double r,i;
+public:
+	Image(double R,double I):temps(),r(R),i(I){}
+
 	virtual temps* inv()const;
 
 	virtual temps* add(const temps *A,const temps *B)const;
@@ -22,8 +25,6 @@ public:
 
 	virtual void set(double v);
 	virtual void set(int v);
-
-	virtual bool greater(const temps* A,const temps* B)const;
 
 	virtual void output(ostream &os)const;
 };
