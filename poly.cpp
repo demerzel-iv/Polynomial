@@ -42,7 +42,7 @@ poly::poly(const poly&A)
 	printf("copy construction\n");
 #endif
 	s=new element[siz=A.siz];
-	for(int i=0;i<=(int)siz;i++)
+	for(int i=0;i<(int)siz;i++)
 		s[i]=A[i];
 }
 poly::poly(poly &&A)
@@ -59,7 +59,7 @@ poly& poly::operator = (const poly &A)
 	printf("copy assignment\n");
 #endif
 	s=new element[siz=A.siz];
-	for(int i=0;i<=(int)siz;i++)
+	for(int i=0;i<(int)siz;i++)
 		s[i]=A[i];
 	return *this;
 }
@@ -177,34 +177,58 @@ poly operator * (const poly &A,const poly &B)
 
 	return C;
 }
-poly operator * (const poly &A,const int &x)
+
+poly poly::operator - (void) const
 {
-	poly B(A.size(),A.type);
-	element v;
-	if(A.type==typei) v.setint(x);
-	else if(A.type==typed) v.setdouble(x);
-	for(int i=0;i<(int)B.size();i++)
-		B[i]=A[i]*v;
+	return -1*(*this);
+}
+poly operator+(const poly &A, const element &x)
+{
+	poly B=A;
+	B[0]=B[0]+x;
 	return B;
 }
-poly operator * (const poly &A,const double &x)
+poly operator+(const element &x, const poly &A)
 {
-	poly B(A.size(),A.type);
-	element v;
-	if(A.type==typei) v.setint(x);
-	else if(A.type==typed) v.setdouble(x);
-	for(int i=0;i<(int)B.size();i++)
-		B[i]=A[i]*v;
+	return A+x;
+}
+poly operator - (const poly &A,const element &x)
+{
+	poly B=A;
+	B[0]=B[0]-x;
 	return B;
 }
-poly operator * (const int &x,const poly &A)
+poly operator - (const element &x,const poly &A)
+{
+	poly B=-A;
+	B[0]=B[0]+x;
+	return B;
+}
+poly operator * (const poly &A,const element &x)
+{
+	poly B=A;
+	for(int i=0;i<(int)B.size();i++)
+		B[i]=B[i]*x;
+	return B;
+}
+poly operator * (const element &x,const poly &A)
 {
 	return A*x;
 }
-poly operator * (const double &x,const poly &A)
-{
-	return A*x;
-}
+poly operator + (const poly &A,const int &x) { return A+element(x); }
+poly operator + (const int &x,const poly &A) { return A+element(x); }
+poly operator - (const poly &A,const int &x) { return A-element(x); }
+poly operator - (const int &x,const poly &A) { return element(x)-A; }
+poly operator * (const poly &A,const int &x) { return A*element(x); }
+poly operator * (const int &x,const poly &A) { return A*element(x); }
+
+poly operator + (const poly &A,const double &x) { return A*1.0+element(x); }
+poly operator + (const double &x,const poly &A) { return A*1.0+element(x); }
+poly operator - (const poly &A,const double &x) { return A*1.0-element(x); }
+poly operator - (const double &x,const poly &A) { return element(x)-A*1.0; }
+poly operator * (const poly &A,const double &x) { return A*element(x); }
+poly operator * (const double &x,const poly &A) { return A*element(x); }
+
 ostream& operator << (ostream& os,const poly &A)
 {
 	for(int i=0;i<(int)A.size();i++)

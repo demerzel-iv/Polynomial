@@ -33,7 +33,7 @@ public:
 	element& operator[] (int i) {return s[i];}
 	element operator[](int i) const {return i<(int)siz?s[i]:0;}
 
-	explicit poly(int length,int type=typei);
+	explicit poly(int length=0,int type=typei);
 	poly(const initializer_list<int> &S);
 	poly(const initializer_list<double> &S);
 	template<typename inputIterator> poly(inputIterator begin,inputIterator end,int type=typei);
@@ -45,29 +45,44 @@ public:
 
 	~poly(){}
 
+	poly operator-(void) const;
+
 	friend bool operator == (const poly &A,const poly &B);
 
 	friend poly operator + (const poly &A,const poly &B);
 	friend poly operator - (const poly &A,const poly &B);
 	friend poly operator * (const poly &A,const poly &B);
 
-	friend poly operator * (const poly &A,const int &x);
-	friend poly operator * (const int &x,const poly &A);
 
-	friend poly operator * (const poly &A,const double &x);
-	friend poly operator * (const double &x,const poly &A);
 
 	friend ostream& operator << (ostream& os,const poly &A);
 };
+
+poly operator + (const poly &A, const element &x);
+poly operator + (const element &x, const poly &A);
+poly operator - (const poly &A,const element &x);
+poly operator - (const element &x,const poly &A);
+poly operator * (const poly &A, const element &x);
+poly operator * (const element &x, const poly &A);
+
+poly operator + (const poly &A,const int &x);
+poly operator + (const int &x,const poly &A);
+poly operator - (const poly &A,const int &x);
+poly operator - (const int &x,const poly &A);
+poly operator * (const poly &A,const int &x);
+poly operator * (const int &x,const poly &A);
+
+poly operator + (const poly &A,const double &x);
+poly operator + (const double &x,const poly &A);
+poly operator - (const poly &A,const double &x);
+poly operator - (const double &x,const poly &A);
+poly operator * (const poly &A,const double &x);
+poly operator * (const double &x,const poly &A);
 
 bool operator < (const poly &A,const poly &B) = delete; 
 bool operator > (const poly &A,const poly &B) = delete;
 bool operator <= (const poly &A,const poly &B) = delete;
 bool operator >= (const poly &A,const poly &B) = delete;
-poly operator + (const poly &A,const int &B) = delete;
-poly operator + (const int &A,const poly &B) = delete;
-poly operator - (const poly &A,const int &B) = delete;
-poly operator - (const int &A,const poly &B) = delete;
 
 
 template<typename inputIterator> poly::poly(inputIterator begin,inputIterator end,int tp) //类的template成员函数的实现必须放在同一文件中
