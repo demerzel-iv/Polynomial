@@ -1,6 +1,5 @@
 main
-test*
+te
 *.o
-save
-savv
 *.swp
+save*
