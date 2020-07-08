@@ -1,4 +1,5 @@
 #include "Int.h"
+#include<bits/stdc++.h>
 
 int Int::qpow(int v,int y)const
 {
@@ -36,11 +37,11 @@ temps* Int::divide(const temps *A,const temps *B)const
 
 temps* Int::origin(int times)const
 {
-	temps *ret=new Int(qpow(g,MOD-2));
+	temps *ret=new Int(qpow(g,(MOD-1)/times));
 	return ret;
 }
 
-temps* Int::v()const{return new Int(x);}
+temps* Int::v()const{return static_cast<temps*>(new Int(x));}
 int Int::type()const{return typei;}
 int Int::value()const{return x;}
 

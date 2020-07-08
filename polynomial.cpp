@@ -13,14 +13,8 @@ void poly::ntt(element *y,int n,int sig)
 			rev[i]=(rev[i>>1]>>1)|(i&1?(n>>1):0);
 	}
 	element tmp;
-	for(int i=0;i<n;i++){
-		if(rev[i]<i){
-			tmp=y[i];
-			y[i]=y[rev[i]];
-			y[rev[i]]=tmp;
-		}
-//		if(rev[i]<i)swap(y[i],y[rev[i]]);
-	}
+	for(int i=0;i<n;i++)
+		if(rev[i]<i)swap(y[i],y[rev[i]]);
 
 	element *y0,*y1,ny0(y[0]),ny1(y[0]),omega(y[0]),x(y[0]);
 	for(int len=2;len<=n;len<<=1)
@@ -147,29 +141,46 @@ poly operator * (const poly &A,const poly &B)
 	int n=1;
 	while(n<=(int)C.size())n<<=1;
 	element *u=new element[n],*v=new element[n];
+	element val0=A[0];
+	val0=0;
 
 	if(A.type==typed){
 		for(int i=0;i<n;i++){
-			u[i].setimage((dynamic_cast<const Double*>(A[i].getvalue()))->value(),0);
-			v[i].setimage((dynamic_cast<const Double*>(B[i].getvalue()))->value(),0);
+			if(i<A.size())
+				u[i].setimage((dynamic_cast<const Double*>(A[i].getvalue()))->value(),0);
+			else
+				u[i].setimage(0);
+			if(i<B.size())
+				v[i].setimage((dynamic_cast<const Double*>(B[i].getvalue()))->value(),0);
+			else
+				v[i].setimage(0);
 		}
 	}
 	else{
-		for(int i=0;i<n;i++)
-			u[i]=A[i],v[i]=B[i];
+		for(int i=0;i<n;i++){
+			if(i<A.size())
+				u[i]=A[i];
+			else
+				u[i]=val0;
+			if(i<B.size())
+				v[i]=B[i];
+			else
+				v[i]=val0;
+		}
 	}
 
-	poly::ntt(u,n,1),poly::ntt(v,n,1);
+	poly::ntt(u,n,1);
+	poly::ntt(v,n,1);
 	for(int i=0;i<n;i++) u[i]=u[i]*v[i];
 	poly::ntt(u,n,-1);
 
 	element invn=A[0];
-	invn=(int)C.size();
+	invn=n;
 	invn=inv(invn);
 	for(int i=0;i<(int)C.size();i++)
 	{
 		if(A.type==typed)
-			C[i].setdouble((dynamic_cast<const Image*>(u[i].getvalue()))->valuer()/(double(C.size())));
+			C[i].setdouble((dynamic_cast<const Image*>(u[i].getvalue()))->valuer()/n);
 		else
 			C[i]=u[i]*invn;
 	}
