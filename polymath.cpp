@@ -1,40 +1,37 @@
 #include "polymath.h"
 #include "polynomial.h"
+#include "element.h"
 
-ipoly polycalc::inv(const ipoly &A) //calc inverse mod x^n
+poly polycalc::inverse(const poly &A) //calc inverse mod x^n
 {
-    ipoly X0(1),X,a;
+    poly X0(1),X(0),a(0);
 
-    X0[0]=ipoly::inv(A[0]);
+    X0[0]=inv(A[0]);
 
     for(int k=1;k<n;k<<=1)
     {
-        printf("k = %d\n",k);
-        a=ipoly(k*2);
+        a=poly(k*2);
         for(int i=0;i<k*2;i++)
             a[i]=A[i];
 
         X=2*X0-a*X0*X0;
 
-        X0=ipoly(k*2);
+        X0=poly(k*2);
         for(int i=0;i<k*2;i++)
             X0[i]=X[i];
     }
 
-    printf("?\n");
-
-    ipoly ret(n);
+    poly ret(n);
     for(int i=0;i<n;i++)
         ret[i]=X0[i];
-    printf("???\n");
     return ret;
 }
-ipoly polycalc::ln(const ipoly &A) //calc ln mod x^n
+poly polycalc::ln(const poly &A) //calc ln mod x^n
 {
 }
-ipoly polycalc::exp(const ipoly &A) // calc exp mod x^n
+poly polycalc::exp(const poly &A) // calc exp mod x^n
 {
 }
-ipoly polycalc::pow(const ipoly &A,int k) //calc A^k mod x^n
+poly polycalc::pow(const poly &A,int k) //calc A^k mod x^n
 {
 }

@@ -39,20 +39,14 @@ void output(element A)
 
 int main()
 {
-	element a(1),b(3),c(2.3);
+	polycalc *calc=new polycalc(10);
 
-	output(a+c);
-	output(a-c);
-	output(a*c);
-	output(a/c);
+	poly B = {1,2,0,0};
+	poly C = calc->inverse(B);
 
-	poly B{1,2,0,0};
-	poly C{1,1,0,0};
-
-//	cout<<"B: "<<B<<endl;
-	poly A=B*C;
-	cout<<"C: "<<A<<endl;
-//	cout<<"B*C: "<<endl;
+	cout<<"B: "<<B<<endl;
+	cout<<"C: "<<C<<endl;
+	cout<<"B*C: "<<B*C<<endl;
 
 	return 0;
 }

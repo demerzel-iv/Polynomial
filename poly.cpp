@@ -1,4 +1,4 @@
-#include "polynomial.h"
+#include "poly.h"
 #include<bits/stdc++.h>
 using namespace std;
 
