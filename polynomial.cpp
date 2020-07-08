@@ -97,18 +97,6 @@ poly::poly(const initializer_list<double> &S)
 	int i=0;
 	for(auto x:S) s[i++].setdouble(x);
 }
-template<typename inputIterator> poly::poly(inputIterator begin,inputIterator end,int tp)
-{
-	type=tp;
-	siz=end-begin;
-	s=new element[siz];
-	for(int i=0;i<(int)siz;i++){
-		if(type==typed) s[i].setdouble(*begin);
-		else if(type==typei) s[i].setint(*begin);
-		begin++;
-	}
-}
-
 bool operator == (const poly &A,const poly &B)
 {
 	if(A.size()!=B.size())return 0;
@@ -218,7 +206,7 @@ poly operator * (const double &x,const poly &A)
 {
 	return A*x;
 }
-ostream& operator << (ostream& os,poly &A)
+ostream& operator << (ostream& os,const poly &A)
 {
 	for(int i=0;i<(int)A.size();i++)
 		os<<A[i]<<" ";

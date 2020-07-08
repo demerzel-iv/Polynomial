@@ -57,7 +57,7 @@ public:
 	friend poly operator * (const poly &A,const double &x);
 	friend poly operator * (const double &x,const poly &A);
 
-	friend ostream& operator << (ostream& os,poly &A);
+	friend ostream& operator << (ostream& os,const poly &A);
 };
 
 bool operator < (const poly &A,const poly &B) = delete; 
@@ -69,3 +69,15 @@ poly operator + (const int &A,const poly &B) = delete;
 poly operator - (const poly &A,const int &B) = delete;
 poly operator - (const int &A,const poly &B) = delete;
 
+
+template<typename inputIterator> poly::poly(inputIterator begin,inputIterator end,int tp) //类的template成员函数的实现必须放在同一文件中
+{
+	type=tp;
+	siz=end-begin;
+	s=new element[siz];
+	for(int i=0;i<(int)siz;i++){
+		if(type==typed) s[i].setdouble(*begin);
+		else if(type==typei) s[i].setint(*begin);
+		begin++;
+	}
+}
