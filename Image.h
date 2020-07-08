@@ -22,7 +22,10 @@ public:
 
 	virtual temps* v()const;
 	virtual int type()const;
+	double valuer()const;
+	double valuei()const;
 
+	virtual void set(double vr,double vi);
 	virtual void set(double v);
 	virtual void set(int v);
 

@@ -17,7 +17,7 @@ public:
 	element(const element &A):value(A.value->v()){}
 	element(element &&A)
 	{
-		delete value;
+		if(value!=nullptr) delete value;
 		value=A.value;
 	}
 
@@ -38,12 +38,13 @@ public:
 
 	element& operator = (const element &A)
 	{
+		if(value!=nullptr&&value!=A.value) delete value;
 		value=A.value->v();
 		return *this;
 	}
 	element& operator = (element &&A)
 	{
-		delete value;
+		if(value!=nullptr) delete value;
 		value=A.value;
 		return *this;
 	}
@@ -68,5 +69,5 @@ public:
 
 	friend ostream& operator << (ostream& os, const element &A);
 
-	~element(){delete value;}
+	~element(){if(value!=nullptr) delete value;}
 };

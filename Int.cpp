@@ -42,6 +42,7 @@ temps* Int::origin(int times)const
 
 temps* Int::v()const{return new Int(x);}
 int Int::type()const{return typei;}
+int Int::value()const{return x;}
 
 void Int::set(double v){x=v;}
 void Int::set(int v){x=v;}

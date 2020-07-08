@@ -1,6 +1,6 @@
 #pragma once
 #include<iostream>
-using namespace std;
+using std::ostream;
 const int typed=0;
 const int typei=1;
 const int type_image=2;

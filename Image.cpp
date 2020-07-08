@@ -39,7 +39,10 @@ temps* Image::origin(int times)const{
 
 temps* Image::v()const{return new Image(r,i);}
 int Image::type()const{return type_image;}
+double Image::valuer()const{return r;}
+double Image::valuei()const{return i;}
 
+void Image::set(double vr,double vi){r=vr,i=vi;}
 void Image::set(double v){r=v,i=0;}
 void Image::set(int v){r=v,i=0;}
 

@@ -19,6 +19,7 @@ public:
 
 	virtual temps* v()const;
 	virtual int type()const;
+	int value()const;
 
 	virtual void set(double v);
 	virtual void set(int v);

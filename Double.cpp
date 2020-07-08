@@ -30,6 +30,7 @@ int Double::type()const{return typed;}
 
 void Double::set(double v){x=v;}
 void Double::set(int v){x=v;}
+double Double::value()const{return x;}
 
 bool Double::greater(const temps* A,const temps* B)const
 {
