@@ -14,24 +14,40 @@ temps* Int::inv()const
 	return ret;
 }
 
-temps* Int::add(const temps *A,const temps *B)const
+temps* Int::add(const temps *A)const
 {
-	temps *ret=new Int((((dynamic_cast<const Int*>(A))->x)+((dynamic_cast<const Int*>(B))->x))%MOD);
+	if(A->type() == typed) return Double(*this).add(A);
+
+	temps *ret=new Int(
+		(this->getValueInt() + A->getValueInt())%MOD
+	);
 	return ret;
 }
-temps* Int::substract(const temps *A,const temps *B)const
+temps* Int::substract(const temps *A)const
 {
-	temps *ret=new Int((((dynamic_cast<const Int*>(A))->x)-((dynamic_cast<const Int*>(B))->x)+MOD)%MOD);
+	if(A->type() == typed) return Double(*this).substract(A);
+
+	temps *ret=new Int(
+		(this->getValueInt() - A->getValueInt() + MOD)%MOD
+	);
 	return ret;
 }
-temps* Int::multiply(const temps *A,const temps *B)const
+temps* Int::multiply(const temps *A)const
 {
-	temps *ret=new Int((((dynamic_cast<const Int*>(A))->x)*(long long)((dynamic_cast<const Int*>(B))->x))%MOD);
+	if(A->type() == typed) return Double(*this).multiply(A);
+
+	temps *ret=new Int(
+		(this->getValueInt() * (long long)A->getValueInt())%MOD
+	);
 	return ret;
 }
-temps* Int::divide(const temps *A,const temps *B)const
+temps* Int::divide(const temps *A)const
 {
-	temps *ret=new Int((((dynamic_cast<const Int*>(A))->x)*(long long)qpow((dynamic_cast<const Int*>(B))->x,MOD-2))%MOD);
+	if(A->type() == typed) return Double(*this).divide(A);
+
+	temps *ret=new Int(
+		(this->getValueInt() * (long long)qpow(A->getValueInt(),MOD-2))%MOD
+	);
 	return ret;
 }
 
@@ -48,9 +64,14 @@ int Int::value()const{return x;}
 void Int::set(double v){x=v;}
 void Int::set(int v){x=v;}
 
-bool Int::greater(const temps* A,const temps* B)const
+bool Int::greater(const temps* A)const
 {
-	return ((dynamic_cast<const Int*>(A))->x)>((dynamic_cast<const Int*>(B))->x);
+	return this->getValueInt() > A->getValueInt();
 }
 
 void Int::output(ostream &os)const{os<<x;}
+
+int Int::getValueInt() const {return x;}
+double Int::getValueDouble() const {return x;}
+
+Int::operator Double() const {return Double(x);}

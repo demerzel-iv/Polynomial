@@ -5,27 +5,27 @@ temps* Image::inv()const{
 	return ret;
 }
 
-temps* Image::add(const temps *A,const temps *B)const{
-	double r1=dynamic_cast<const Image*>(A)->r,r2=dynamic_cast<const Image*>(B)->r;
-	double i1=dynamic_cast<const Image*>(A)->i,i2=dynamic_cast<const Image*>(B)->i;
+temps* Image::add(const temps *A)const{
+	double r1=this->getValueReal(),r2=A->getValueReal();
+	double i1=this->getValueImage(),i2=A->getValueImage();
 	temps *ret=new Image(r1+r2,i1+i2);
 	return ret;
 }
-temps* Image::substract(const temps *A,const temps *B)const{
-	double r1=dynamic_cast<const Image*>(A)->r,r2=dynamic_cast<const Image*>(B)->r;
-	double i1=dynamic_cast<const Image*>(A)->i,i2=dynamic_cast<const Image*>(B)->i;
+temps* Image::substract(const temps *A)const{
+	double r1=this->getValueReal(),r2=A->getValueReal();
+	double i1=this->getValueImage(),i2=A->getValueImage();
 	temps *ret=new Image(r1-r2,i1-i2);
 	return ret;
 }
-temps* Image::multiply(const temps *A,const temps *B)const{
-	double r1=dynamic_cast<const Image*>(A)->r,r2=dynamic_cast<const Image*>(B)->r;
-	double i1=dynamic_cast<const Image*>(A)->i,i2=dynamic_cast<const Image*>(B)->i;
+temps* Image::multiply(const temps *A)const{
+	double r1=this->getValueReal(),r2=A->getValueReal();
+	double i1=this->getValueImage(),i2=A->getValueImage();
 	temps *ret=new Image(r1*r2-i1*i2,r1*i2+r2*i1);
 	return ret;
 }
-temps* Image::divide(const temps *A,const temps *B)const{
-	double r1=dynamic_cast<const Image*>(A)->r,r2=dynamic_cast<const Image*>(B)->r;
-	double i1=dynamic_cast<const Image*>(A)->i,i2=dynamic_cast<const Image*>(B)->i;
+temps* Image::divide(const temps *A)const{
+	double r1=this->getValueReal(),r2=A->getValueReal();
+	double i1=this->getValueImage(),i2=A->getValueImage();
 	double len=r2*r2+i2*i2;
 	r2=r2/len,i2=-i2/len;
 	temps *ret=new Image(r1*r2-i1*i2,r1*i2+r2*i1);
@@ -47,3 +47,6 @@ void Image::set(double v){r=v,i=0;}
 void Image::set(int v){r=v,i=0;}
 
 void Image::output(ostream &os)const{os<<"("<<r<<","<<i<<")";}
+
+double Image::getValueReal() const {return r;}
+double Image::getValueImage() const {return i;}

@@ -1,22 +1,30 @@
 #include "Double.h"
-temps* Double::add(const temps *A,const temps *B)const
+temps* Double::add(const temps *A)const
 {
-	temps* ret=new Double(((dynamic_cast<const Double*>(A))->x)+((dynamic_cast<const Double*>(B))->x));
+	temps* ret = new Double (
+		this->getValueDouble() + A->getValueDouble()
+	);
 	return ret;
 }
-temps* Double::substract(const temps *A,const temps *B)const
+temps* Double::substract(const temps *A)const
 {
-	temps* ret=new Double(((dynamic_cast<const Double*>(A))->x)-((dynamic_cast<const Double*>(B))->x));
+	temps* ret = new Double (
+		this->getValueDouble() - A->getValueDouble()
+	);
 	return ret;
 }
-temps* Double::multiply(const temps *A,const temps *B)const
+temps* Double::multiply(const temps *A)const
 {
-	temps* ret=new Double(((dynamic_cast<const Double*>(A))->x)*((dynamic_cast<const Double*>(B))->x));
+	temps* ret = new Double (
+		this->getValueDouble() * A->getValueDouble()
+	);
 	return ret;
 }
-temps* Double::divide(const temps *A,const temps *B)const
+temps* Double::divide(const temps *A)const
 {
-	temps* ret=new Double(((dynamic_cast<const Double*>(A))->x)/((dynamic_cast<const Double*>(B))->x));
+	temps* ret = new Double (
+		this->getValueDouble() / A->getValueDouble()
+	);
 	return ret;
 }
 temps* Double::inv()const
@@ -32,10 +40,12 @@ void Double::set(double v){x=v;}
 void Double::set(int v){x=v;}
 double Double::value()const{return x;}
 
-bool Double::greater(const temps* A,const temps* B)const
+bool Double::greater(const temps* A)const
 {
-	return ((dynamic_cast<const Double*>(A))->x)>((dynamic_cast<const Double*>(B))->x);
+	return this->getValueDouble() > A->getValueDouble();
 }
 
 void Double::output(ostream &os)const{os<<x;}
 
+int Double::getValueInt() const {return x;}
+double Double::getValueDouble() const {return x;}

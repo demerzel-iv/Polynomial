@@ -32,13 +32,24 @@ void test1()
 
 }
 
+void output(element A)
+{
+	cout<<A<<" type = "<<A.getvalue()->type()<<endl;
+}
+
 int main()
 {
-	poly A = {0.0,1.0};
+	element a(1),b(3),c(2.3);
 
-	A=A*A;
+	output(a+c);
+	output(a-c);
+	output(a*c);
+	output(a/c);
 
-	cout<<A<<endl;
+	output(a+b);
+	output(a-b);
+
+	output(c*(a*b));
 
 	return 0;
 }

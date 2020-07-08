@@ -13,10 +13,10 @@ public:
 
 	virtual temps* inv()const;
 
-	virtual temps* add(const temps *A,const temps *B)const;
-	virtual temps* substract(const temps *A,const temps *B)const;
-	virtual temps* multiply(const temps *A,const temps *B)const;
-	virtual temps* divide(const temps *A,const temps *B)const;
+	virtual temps* add(const temps *A)const;
+	virtual temps* substract(const temps *A)const;
+	virtual temps* multiply(const temps *A)const;
+	virtual temps* divide(const temps *A)const;
 
 	virtual temps* origin(int times)const;
 
@@ -30,4 +30,7 @@ public:
 	virtual void set(int v);
 
 	virtual void output(ostream &os)const;
+
+	virtual double getValueReal() const override;
+	virtual double getValueImage() const override;
 };
