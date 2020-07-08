@@ -19,7 +19,6 @@ void poly::ntt(element *y,int n,int sig)
 	element *y0,*y1,ny0(y[0]),ny1(y[0]),omega(y[0]),x(y[0]);
 	for(int len=2;len<=n;len<<=1)
 	{
-//		int omega = qpow(3,(MOD-1)/len), h=len>>1 ,x;
 		omega=omega.origin(len);
 		int h=len>>1;
 		if(sig==-1) omega=inv(omega);

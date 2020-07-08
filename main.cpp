@@ -46,10 +46,20 @@ int main()
 	output(a*c);
 	output(a/c);
 
+<<<<<<< Updated upstream
 	output(a+b);
 	output(a-b);
 
 	output(c*(a*b));
+=======
+	poly B{1,2,0,0};
+	poly C{1,1,0,0};
+
+//	cout<<"B: "<<B<<endl;
+	poly A=B*C;
+	cout<<"C: "<<A<<endl;
+//	cout<<"B*C: "<<endl;
+>>>>>>> Stashed changes
 
 	return 0;
 }

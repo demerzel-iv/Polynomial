@@ -1,6 +1,5 @@
 #pragma once
-#include<iostream>
-using std::ostream;
+#include"Imaginary.h"
 const int typed=0;
 const int typei=1;
 const int type_image=2;
@@ -22,4 +21,5 @@ public:
 	virtual double getValueDouble()const{return 0;}
 	virtual double getValueReal()const{return 0;}
 	virtual double getValueImage()const{return 0;}
+	virtual Imaginary getValueImaginary()const{return Imaginary(0,0);}
 };

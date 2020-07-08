@@ -1,15 +1,11 @@
 #pragma once
 #include "temps.h"
-#include<cmath>
 
-using std::acos;
-using std::sin;
-using std::cos;
-const double pi=acos(-1.0);
 class Image:public temps{
-	double r,i;
+	Imaginary x;
 public:
-	Image(double R,double I):temps(),r(R),i(I){}
+	Image(double R,double I):temps(),x(R,I){}
+	Image(const Imaginary &X):temps(),x(X){}
 
 	virtual temps* inv()const;
 
@@ -24,6 +20,7 @@ public:
 	virtual int type()const;
 	double valuer()const;
 	double valuei()const;
+	Imaginary valuex()const;
 
 	virtual void set(double vr,double vi);
 	virtual void set(double v);
@@ -33,4 +30,5 @@ public:
 
 	virtual double getValueReal() const override;
 	virtual double getValueImage() const override;
+	virtual Imaginary getValueImaginary() const override;
 };
