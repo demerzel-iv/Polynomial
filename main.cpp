@@ -19,6 +19,8 @@ int main()
 	cout<<format(A)<<endl;
 	cout<<format(A*A)<<endl;
 
+	cout<<x+x<<endl;
+
 //cout<<A<<endl;
 	//cout<<A*A<<endl;
 

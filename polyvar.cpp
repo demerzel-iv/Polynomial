@@ -6,12 +6,15 @@ polyvar::operator poly() const
 {
     return x^1;
 }
-
 poly operator ^ (const polyvar &x,int exp)
 {
     poly ret (exp+1);
     ret[exp]=1;
     return ret;
+}
+poly operator + (const polyvar &x,const polyvar &y)
+{
+    return x*2;
 }
 
 unsigned int polyFormatOutputer::size() const
