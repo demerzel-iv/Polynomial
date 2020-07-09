@@ -2,6 +2,20 @@
 #include "polynomial.h"
 #include "element.h"
 
+poly polycalc::derivative(const poly &A)
+{
+    poly ret(A.size()-1);
+    for(int i=0;i<A.size()-1;i++)
+        ret[i]=A[i+1]*(i+1);
+    return ret;
+}
+poly polycalc::intgration(const poly &A)  //with C=0
+{
+    poly ret(A.size()+1);
+    for(int i=1;i<A.size()+1;i++)
+        ret[i]=A[i-1]/i;
+    return ret;
+}
 poly polycalc::inverse(const poly &A) //calc inverse mod x^n
 {
     poly X0(1),X(0),a(0);
@@ -30,8 +44,5 @@ poly polycalc::ln(const poly &A) //calc ln mod x^n
 {
 }
 poly polycalc::exp(const poly &A) // calc exp mod x^n
-{
-}
-poly polycalc::pow(const poly &A,int k) //calc A^k mod x^n
 {
 }
