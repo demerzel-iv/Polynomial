@@ -1,4 +1,5 @@
 #include "Double.h"
+const double EXP=1e-9;
 temps* Double::add(const temps *A)const
 {
 	temps* ret = new Double (
@@ -42,7 +43,7 @@ double Double::value()const{return x;}
 
 bool Double::greater(const temps* A)const
 {
-	return this->getValueDouble() > A->getValueDouble();
+	return this->getValueDouble() > A->getValueDouble() + EXP;
 }
 
 void Double::output(ostream &os)const{os<<x;}
