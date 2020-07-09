@@ -14,6 +14,9 @@ public:
 
 poly operator ^ (const polyvar &x,int exp);
 poly operator + (const polyvar &x,const polyvar &y);
+poly operator - (const polyvar &x,const polyvar &y);
+poly operator * (const polyvar &x,const polyvar &y);
+poly operator / (const polyvar &x,const polyvar &y);
 
 class polyFormatOutputer
 {
