@@ -115,9 +115,6 @@ poly operator + (const poly &A,const poly &B)
 }
 poly operator - (const poly &A,const poly &B)
 {
-	printf("?\n");
-	cout<<A<<endl;
-	cout<<B<<endl;
 
 	poly ret(max(A.size(),B.size()));
 	for(int i=0;i<(int)A.size();i++)
@@ -128,7 +125,6 @@ poly operator - (const poly &A,const poly &B)
 	if(mixtype(A.type(),B.type()) == typed)
 		ret = ret*1.0;
 
-	cout<<"ret = "<<ret<<endl;
 	return ret;
 }
 poly operator * (const poly &A,const poly &B)

@@ -14,15 +14,12 @@ int main()
 
 	polyvar& x = polyvar::x;
 
-	poly A = (x^2) - 2.0*x + 1 ;
+	poly A=(x+2)*(x+1);
+	poly B{1.0,1.0,0.0,0.0};
 
 	cout<<format(A)<<endl;
-	cout<<format(A*A)<<endl;
-
-	cout<<x+x<<endl;
-
-//cout<<A<<endl;
-	//cout<<A*A<<endl;
+	cout<<format(B)<<endl;
+	cout<<format(A*B)<<endl;
 
 	return 0;
 }
