@@ -15,6 +15,7 @@ public:
 	virtual temps* substract(const temps *A)const;
 	virtual temps* multiply(const temps *A)const;
 	virtual temps* divide(const temps *A)const;
+	virtual temps* qpow(const temps *A,const int &B)const;
 
 	virtual temps* origin(int times)const;
 

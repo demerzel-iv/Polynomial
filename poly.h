@@ -53,6 +53,7 @@ public:
 	friend poly operator + (const poly &A,const poly &B);
 	friend poly operator - (const poly &A,const poly &B);
 	friend poly operator * (const poly &A,const poly &B);
+	friend poly operator ^ (const poly &A,int exp);
 
 	friend ostream& operator << (ostream& os,const poly &A);
 };
@@ -94,3 +95,4 @@ template<typename inputIterator> poly::poly(inputIterator begin,inputIterator en
 		begin++;
 	}
 }
+const poly VARX{0,1};

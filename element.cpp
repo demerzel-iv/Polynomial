@@ -13,6 +13,9 @@ element operator * (const element &A,const element &B){
 element operator / (const element &A,const element &B){
 	return element(A.value->divide(B.value));
 }
+element operator ^ (const element &A,const int &B){
+	return element(A.value->qpow(A.value,B));
+}
 bool operator < (const element &A,const element &B){
 	return B.value->greater(B.value);
 }
@@ -48,3 +51,4 @@ ostream& operator << (ostream& os, const element &A){
 	A.value->output(os);
 	return os;
 }
+

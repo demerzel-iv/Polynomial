@@ -9,6 +9,7 @@ public:
 	virtual temps* substract(const temps *A)const=0;
 	virtual temps* multiply(const temps *A)const=0;
 	virtual temps* divide(const temps *A)const=0;
+	virtual temps* qpow(const temps *A,const int &B)const=0;
 	virtual temps* v()const=0;
 	virtual temps* inv()const=0;
 	virtual temps* origin(int times)const{return nullptr;}

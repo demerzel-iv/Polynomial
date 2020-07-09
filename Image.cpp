@@ -11,6 +11,13 @@ temps* Image::inv()const{
 	return ret;
 }
 
+Imaginary Image::qpow(Imaginary v,int y)const
+{
+	Imaginary z(1.0,0.0);
+	for(;y;y>>=1,v=v*v)
+		if(y&1)z=z*v;
+	return z;
+}
 temps* Image::add(const temps *A)const{
 	temps *ret=new Image((this->getValueImaginary())+(A->getValueImaginary()));
 	return ret;
@@ -25,6 +32,13 @@ temps* Image::multiply(const temps *A)const{
 }
 temps* Image::divide(const temps *A)const{
 	temps *ret=new Image((this->getValueImaginary())/(A->getValueImaginary()));
+	return ret;
+}
+temps* Image::qpow(const temps *A,const int &B)const
+{
+	temps *ret=new Image(
+		qpow(this->getValueImaginary(),B)
+	);
 	return ret;
 }
 

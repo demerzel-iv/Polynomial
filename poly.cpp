@@ -185,6 +185,19 @@ poly operator * (const poly &A,const poly &B)
 
 	return C;
 }
+poly operator ^ (const poly &A,int exp)
+{
+	if(A.size()==1)
+	{
+		poly ret(1);
+		ret[0]=A[0]^exp;
+		return ret;
+	}
+	poly z{1},v(A);
+	for(;exp;exp>>=1,v=v*v)
+		if(exp&1) z=z*v;
+	return z;
+}
 
 poly poly::operator - (void) const
 {

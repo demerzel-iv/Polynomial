@@ -6,6 +6,7 @@ class Image:public temps{
 public:
 	Image(double R,double I):temps(),x(R,I){}
 	Image(const Imaginary &X):temps(),x(X){}
+	Imaginary qpow(Imaginary v,int y)const;
 
 	virtual temps* inv()const;
 
@@ -13,6 +14,7 @@ public:
 	virtual temps* substract(const temps *A)const;
 	virtual temps* multiply(const temps *A)const;
 	virtual temps* divide(const temps *A)const;
+	virtual temps* qpow(const temps *A,const int &B)const;
 
 	virtual temps* origin(int times)const;
 

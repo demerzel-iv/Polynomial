@@ -3,6 +3,7 @@
 
 int Int::qpow(int v,int y)const
 {
+	if(v==1) return 1;
 	int z=1;
 	for(;y;y>>=1,v=(long long)v*v%MOD)
 		if(y&1)z=(long long)z*v%MOD;
@@ -47,6 +48,13 @@ temps* Int::divide(const temps *A)const
 
 	temps *ret=new Int(
 		(this->getValueInt() * (long long)qpow(A->getValueInt(),MOD-2))%MOD
+	);
+	return ret;
+}
+temps* Int::qpow(const temps *A,const int &B)const
+{
+	temps *ret=new Int(
+		qpow(this->getValueInt(),B)
 	);
 	return ret;
 }

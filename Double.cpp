@@ -1,5 +1,12 @@
 #include "Double.h"
-const double EXP=1e-9;
+const double eps=1e-9;
+double Double::qpow(double v,int y)const
+{
+	double z=1;
+	for(;y;y>>=1,v=v*v)
+		if(y&1)z=z*v;
+	return z;
+}
 temps* Double::add(const temps *A)const
 {
 	temps* ret = new Double (
@@ -28,6 +35,13 @@ temps* Double::divide(const temps *A)const
 	);
 	return ret;
 }
+temps* Double::qpow(const temps *A,const int &B)const
+{
+	temps *ret=new Double(
+		qpow(this->getValueDouble(),B)
+	);
+	return ret;
+}
 temps* Double::inv()const
 {
 	temps* ret=static_cast<temps*>(new Double(1.0/x));
@@ -43,7 +57,7 @@ double Double::value()const{return x;}
 
 bool Double::greater(const temps* A)const
 {
-	return this->getValueDouble() > A->getValueDouble() + EXP;
+	return this->getValueDouble() > A->getValueDouble() + eps;
 }
 
 void Double::output(ostream &os)const{os<<x;}

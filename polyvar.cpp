@@ -12,10 +12,6 @@ poly operator ^ (const polyvar &x,int exp)
     ret[exp]=1;
     return ret;
 }
-poly operator + (const polyvar &x,const polyvar &y)
-{
-    return x*2;
-}
 
 unsigned int polyFormatOutputer::size() const
 {

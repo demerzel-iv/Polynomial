@@ -27,6 +27,7 @@ public:
 	friend element operator - (const element &A,const element &B);
 	friend element operator * (const element &A,const element &B);
 	friend element operator / (const element &A,const element &B);
+	friend element operator ^ (const element &A,const int &B);
 	friend bool operator < (const element &A,const element &B);
 	friend bool operator <= (const element &A,const element &B);
 	friend bool operator > (const element &A,const element &B);

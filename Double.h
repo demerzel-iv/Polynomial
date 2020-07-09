@@ -4,6 +4,7 @@ class Double:public temps{
 	double x;
 public:
 	Double(double X=0.0):temps(),x(X){}
+	double qpow(double v,int y)const;
 
 	virtual temps* inv()const;
 
@@ -11,6 +12,7 @@ public:
 	virtual temps* substract(const temps *A)const;
 	virtual temps* multiply(const temps *A)const;
 	virtual temps* divide(const temps *A)const;
+	virtual temps* qpow(const temps *A,const int &B)const;
 
 	virtual temps* origin(int times)=delete;
 
