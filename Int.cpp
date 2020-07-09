@@ -66,6 +66,7 @@ void Int::set(int v){x=v;}
 
 bool Int::greater(const temps* A)const
 {
+	if(A->type() == typed) return Double(*this).greater(A);
 	return this->getValueInt() > A->getValueInt();
 }
 

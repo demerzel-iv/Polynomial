@@ -2,6 +2,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int mixtype(int t1,int t2)
+{
+	if(t1==typed || t2==typed)return typed;
+	else return typei;
+}
 
 void poly::ntt(element *y,int n,int sig)
 {
@@ -73,25 +78,18 @@ poly& poly::operator = (poly &&A)
 	return *this;
 }
 
-poly::poly(int length,int tp): siz(length),type(tp)
+poly::poly(int length): siz(length)
 {
 	s=new element[siz];
-	for(int i=0;i<(int)siz;i++)
-	{
-		if(type==typed) s[i].setdouble();
-		if(type==typei) s[i].setint();
-	}
 }
 poly::poly(const initializer_list<int> &S)
 {
-	type=typei;
 	s=new element[siz=S.size()];
 	int i=0;
 	for(auto x:S) s[i++].setint(x);
 }
 poly::poly(const initializer_list<double> &S)
 {
-	type=typed;
 	s=new element[siz=S.size()];
 	int i=0;
 	for(auto x:S) s[i++].setdouble(x);
@@ -105,25 +103,39 @@ bool operator == (const poly &A,const poly &B)
 }
 poly operator + (const poly &A,const poly &B)
 {
-	poly ret(max(A.size(),B.size()),A.type);
+	poly ret(max(A.size(),B.size()));
 	for(int i=0;i<(int)A.size();i++)
 		ret[i]=A[i];
 	for(int i=0;i<(int)B.size();i++)
 		ret[i]=ret[i]+B[i];
+
+	if(mixtype(A.type(),B.type()) == typed)
+		ret = ret*1.0;
 	return ret;
 }
 poly operator - (const poly &A,const poly &B)
 {
-	poly ret(max(A.size(),B.size()),A.type);
+	printf("?\n");
+	cout<<A<<endl;
+	cout<<B<<endl;
+
+	poly ret(max(A.size(),B.size()));
 	for(int i=0;i<(int)A.size();i++)
 		ret[i]=A[i];
 	for(int i=0;i<(int)B.size();i++)
 		ret[i]=ret[i]-B[i];
+		
+	if(mixtype(A.type(),B.type()) == typed)
+		ret = ret*1.0;
+
+	cout<<"ret = "<<ret<<endl;
 	return ret;
 }
 poly operator * (const poly &A,const poly &B)
 {
-	poly C(A.size()+B.size()-1,A.type);
+	if(A.type()!=B.type())return (A*1.0)*(B*1.0);
+
+	poly C(A.size()+B.size()-1);
 
 	int n=1;
 	while(n<=(int)C.size())n<<=1;
@@ -131,7 +143,7 @@ poly operator * (const poly &A,const poly &B)
 	element val0=A[0];
 	val0=0;
 
-	if(A.type==typed){
+	if(A.type()==typed){
 		for(int i=0;i<n;i++){
 			if(i<A.size())
 				u[i].setimage((dynamic_cast<const Double*>(A[i].getvalue()))->value(),0);
@@ -166,7 +178,7 @@ poly operator * (const poly &A,const poly &B)
 	invn=inv(invn);
 	for(int i=0;i<(int)C.size();i++)
 	{
-		if(A.type==typed)
+		if(A.type()==typed)
 			C[i].setdouble((dynamic_cast<const Image*>(u[i].getvalue()))->valuer()/n);
 		else
 			C[i]=u[i]*invn;
@@ -184,8 +196,11 @@ poly poly::operator - (void) const
 }
 poly operator+(const poly &A, const element &x)
 {
-	poly B=A;
-	B[0]=B[0]+x;
+	poly B(A.size());
+	B[0]=A[0]+x;
+	for(int i=1;i<A.size();i++)
+		B[i]=A[i];
+	if(B.type()==typed)B=B*1.0;
 	return B;
 }
 poly operator+(const element &x, const poly &A)
@@ -194,21 +209,17 @@ poly operator+(const element &x, const poly &A)
 }
 poly operator - (const poly &A,const element &x)
 {
-	poly B=A;
-	B[0]=B[0]-x;
-	return B;
+	return A+x*(-1);
 }
 poly operator - (const element &x,const poly &A)
 {
-	poly B=-A;
-	B[0]=B[0]+x;
-	return B;
+	return x+A*(-1);
 }
 poly operator * (const poly &A,const element &x)
 {
-	poly B=A;
-	for(int i=0;i<(int)B.size();i++)
-		B[i]=B[i]*x;
+	poly B(A.size());
+	for(int i=0;i<A.size();i++)
+		B[i]=A[i]*x;
 	return B;
 }
 poly operator * (const element &x,const poly &A)

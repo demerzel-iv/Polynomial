@@ -10,8 +10,8 @@ class element{
 private:
 	temps* value;
 public:
-	element(){value=nullptr;}
-	element(int x):value(static_cast<temps*>(new Int(x))){}
+	//element(){value=nullptr;}
+	element(int x = 0):value(static_cast<temps*>(new Int(x))){}
 	element(double x):value(static_cast<temps*>(new Double(x))){}
 	element(double r,double i):value(static_cast<temps*>(new Image(r,i))){}
 
@@ -19,7 +19,6 @@ public:
 	element(const element &A){value=A.value->v();}
 	element(element &&A)
 	{
-		if(value!=nullptr&&value!=A.value) delete value;
 		value=A.value;
 		A.value=nullptr;
 	}
@@ -70,6 +69,7 @@ public:
 	void setimage(double r=0,double i=0);
 
 	temps* getvalue();
+	int type()const;
 
 	friend ostream& operator << (ostream& os, const element &A);
 

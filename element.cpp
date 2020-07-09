@@ -42,6 +42,7 @@ void element::setdouble(double x){value=static_cast<temps*>(new Double(x));}
 void element::setimage(double r,double i){value=static_cast<temps*>(new Image(r,i));}
 
 temps* element::getvalue(){return value;}
+int element::type() const{return value->type();}
 
 ostream& operator << (ostream& os, const element &A){
 	A.value->output(os);

@@ -16,7 +16,6 @@ class poly
 
 	unsigned int siz;
 	element* s;
-	int type;
 
 public:
 
@@ -33,7 +32,7 @@ public:
 	element& operator[] (int i) {return s[i];}
 	element operator[](int i) const {return i<(int)siz?s[i]:0;}
 
-	explicit poly(int length=0,int type=typei);
+	explicit poly(int length=0);
 	poly(const initializer_list<int> &S);
 	poly(const initializer_list<double> &S);
 	template<typename inputIterator> poly(inputIterator begin,inputIterator end,int type=typei);
@@ -45,6 +44,8 @@ public:
 
 	~poly(){}
 
+	int type()const {return siz==0? typei : s[0].type();}
+
 	poly operator-(void) const;
 
 	friend bool operator == (const poly &A,const poly &B);
@@ -52,8 +53,6 @@ public:
 	friend poly operator + (const poly &A,const poly &B);
 	friend poly operator - (const poly &A,const poly &B);
 	friend poly operator * (const poly &A,const poly &B);
-
-
 
 	friend ostream& operator << (ostream& os,const poly &A);
 };
@@ -87,12 +86,11 @@ bool operator >= (const poly &A,const poly &B) = delete;
 
 template<typename inputIterator> poly::poly(inputIterator begin,inputIterator end,int tp) //类的template成员函数的实现必须放在同一文件中
 {
-	type=tp;
 	siz=end-begin;
 	s=new element[siz];
 	for(int i=0;i<(int)siz;i++){
-		if(type==typed) s[i].setdouble(*begin);
-		else if(type==typei) s[i].setint(*begin);
+		if(type()==typed) s[i].setdouble(*begin);
+		else if(type()==typei) s[i].setint(*begin);
 		begin++;
 	}
 }
