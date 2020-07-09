@@ -1,3 +1,4 @@
+#include <bits/stdc++.h>
 #include "Double.h"
 const double eps=1e-9;
 double Double::qpow(double v,int y)const
@@ -64,3 +65,8 @@ void Double::output(ostream &os)const{os<<x;}
 
 int Double::getValueInt() const {return x;}
 double Double::getValueDouble() const {return x;}
+
+temps* Double::exp() const
+{
+	return new Double(std::exp(x));
+}

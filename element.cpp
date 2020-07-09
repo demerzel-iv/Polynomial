@@ -37,6 +37,7 @@ bool operator != (const element &A,const element &B){
 
 
 element inv(const element &A){return element(A.value->inv());}
+element exp(const element &A){return element(A.value->exp());}
 
 element element::origin(int times){return element(value->origin(times));}
 

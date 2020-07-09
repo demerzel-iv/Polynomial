@@ -37,7 +37,7 @@ public:
 	
 
 	friend element inv(const element &A);
-
+	friend element exp(const element &A);
 
 	element& operator = (const element &A)
 	{

@@ -13,6 +13,7 @@ public:
 	virtual temps* v()const=0;
 	virtual temps* inv()const=0;
 	virtual temps* origin(int times)const{return nullptr;}
+	virtual temps* exp()const{return nullptr;}
 	virtual void set(double v)=0;
 	virtual void set(int v)=0;
 	virtual int type()const=0;

@@ -15,6 +15,7 @@ public:
 	virtual temps* qpow(const temps *A,const int &B)const;
 
 	virtual temps* origin(int times)=delete;
+	virtual temps* exp()const;
 
 	virtual temps* v()const;
 	virtual int type()const;

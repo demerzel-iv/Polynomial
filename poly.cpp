@@ -1,4 +1,5 @@
 #include "poly.h"
+#include "polyvar.h"
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -43,26 +44,17 @@ void poly::ntt(element *y,int n,int sig)
 
 poly::poly(const poly&A)
 {
-#ifdef _DEBUG
-	printf("copy construction\n");
-#endif
 	s=new element[siz=A.siz];
 	for(int i=0;i<(int)siz;i++)
 		s[i]=A[i];
 }
 poly::poly(poly &&A)
 {
-#ifdef _DEBUG
-	printf("move construction\n");
-#endif
 	s=A.s;
 	siz=A.siz;
 }
 poly& poly::operator = (const poly &A)
 {
-#ifdef _DEBUG
-	printf("copy assignment\n");
-#endif
 	s=new element[siz=A.siz];
 	for(int i=0;i<(int)siz;i++)
 		s[i]=A[i];
@@ -70,9 +62,6 @@ poly& poly::operator = (const poly &A)
 }
 poly& poly::operator = (poly &&A)
 {
-#ifdef _DEBUG
-	printf("move assignment\n");
-#endif
 	s=A.s;
 	siz=A.siz;
 	return *this;
@@ -184,6 +173,19 @@ poly operator * (const poly &A,const poly &B)
 	delete [] v;
 
 	return C;
+}
+poly operator / (const poly &A, const poly &B) //TODO
+{
+}
+poly operator % (const poly &A, const poly &B) //TODO
+{
+	if(B == (polyvar::x ^ (B.size()-1)))
+	{
+		poly C(B.size()-1);
+		for(int i=0;i<C.size();i++)
+			C[i]=A[i];
+		return C;
+	}
 }
 poly operator ^ (const poly &A,int exp)
 {

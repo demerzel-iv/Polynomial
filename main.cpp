@@ -12,43 +12,25 @@ int main()
 {
 	cout<<std::fixed<<std::setprecision(2);
 
-<<<<<<< HEAD
-	poly x = VARX;
+	//element a(0);
+	//output(a*1.0);
+	//return 0;
 
-	poly A=(x+1);
-	A=A^3;
-	poly B{1.0,1.0,0.0,0.0};
-	swap(A,B);
-	poly C{0,1};
-	poly D{0,1};
-
-	cout<<format(x)<<endl;
-	cout<<format(A)<<endl;
-	cout<<format(B)<<endl;
-	cout<<format(A*B)<<endl;
-	cout<<format(C*D)<<endl;
-=======
 	polyvar& x = polyvar::x;
-	polycalc calc(4);
+	polycalc calc(10);
 
-	cout<<x*x<<endl;
-	cout<<x/x<<endl;
-	cout<<x-x<<endl;
+	//poly A=(2*x+1)*(x+1)*(3*x+1)*1.0;
+	poly A = {2.3,0.0,1.2,3.234};
 
-	poly A=(x+2)*(x+1);
-	poly B{1.0,1.0,0.0,3.0};
+	cout<<A<<endl;
 
-	cout <<A<<endl;
-	cout<<calc.intgration(A)<<endl;
-	cout<<calc.derivative(A)<<endl;
+	poly B=calc.ln(A);
 
-	cout<<calc.intgration(calc.derivative(A))<<endl;
-	cout<<calc.derivative(calc.intgration(A))<<endl;
+	cout<<B<<endl;
 
-	cout<<format(B)<<endl;
-	cout<<format(calc.intgration(B))<<endl;
-	cout<<format(calc.derivative(B))<<endl;
->>>>>>> d5116568daf0c96e360306f568003ad94c31c791
+	//cout<<1 + B + (B^2)*inv((element)2.0) + (B^3)*inv((element)6.0) <<endl;
+
+	cout<<calc.exp(B)<<endl;
 
 	return 0;
 }

@@ -84,3 +84,11 @@ int Int::getValueInt() const {return x;}
 double Int::getValueDouble() const {return x;}
 
 Int::operator Double() const {return Double(x);}
+
+temps* Int::exp() const
+{
+	if(x==0)
+		return new Int(1);
+	else 
+		return new Double(std::exp(x));
+}
