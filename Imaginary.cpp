@@ -16,7 +16,7 @@ Imaginary operator - (const Imaginary &A,const Imaginary &B)
 }
 Imaginary operator * (const Imaginary &A,const Imaginary &B)
 {
-	return Imaginary{A.r*B.r-A.i*B.i,A.r*B.i+A.i*B.r};
+	return Imaginary(A.r*B.r-A.i*B.i,A.r*B.i+A.i*B.r);
 }
 Imaginary operator / (const Imaginary &A,const Imaginary &B)
 {
