@@ -6,7 +6,7 @@ codes = Imaginary.cpp Int.cpp Double.cpp Image.cpp element.cpp poly.cpp polymath
 main : $(objects) main.cpp 
 	$(CompOpt) $(objects) main.cpp -o main 
 
-lib: $(code)
+lib: $(codes)
 	g++ -shared -fPIC $(codes) -o libpoly.so 
 
 Int.o: Int.h temps.h
