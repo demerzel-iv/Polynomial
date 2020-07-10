@@ -1,5 +1,6 @@
 main
 *.o
+*.so
 *.swp
 .vscode/
 save*

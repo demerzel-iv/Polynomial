@@ -1,8 +1,13 @@
 CompOpt = g++ -O2 -std=c++11
 objects = Imaginary.o Int.o Double.o Image.o element.o poly.o polymath.o polyvar.o
 
+codes = Imaginary.cpp Int.cpp Double.cpp Image.cpp element.cpp poly.cpp polymath.cpp polyvar.cpp
+
 main : $(objects) main.cpp 
 	$(CompOpt) $(objects) main.cpp -o main 
+
+lib: $(code)
+	g++ -shared -fPIC $(codes) -o libpoly.so 
 
 Int.o: Int.h temps.h
 Double.o: Double.h temps.h
@@ -13,5 +18,5 @@ polymath.o: polymath.h poly.h
 poly.o:  poly.h element.h
 polyvar.o: polyvar.h poly.h
 
-clean:
+clean: 
 	rm $(objects)
