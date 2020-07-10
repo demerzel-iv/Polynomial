@@ -8,6 +8,8 @@ main : $(objects) main.cpp
 
 lib: $(codes)
 	g++ -shared -fPIC $(codes) -o libpoly.so 
+staticlib: $(objects)
+	ar -crv libpoly.a $(objects)
 
 Int.o: Int.h temps.h
 Double.o: Double.h temps.h

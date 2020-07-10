@@ -1,5 +1,6 @@
 main
 *.o
+*.a
 *.so
 *.swp
 .vscode/
