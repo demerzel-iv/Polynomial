@@ -27,6 +27,8 @@ poly polycalc::intgration(const poly &A)  //with C=0
 }
 poly polycalc::inv(const poly &A) //calc inverse mod x^n
 {
+    //cout<<"calc inverse of : "<<A<<endl;
+
     poly X0(1),X;
     X0[0]=getinv(A[0]);
     for(int k=1;k<n;k<<=1)

@@ -30,7 +30,7 @@ public:
 	unsigned int size() const {return siz;}
 
 	element& operator[] (int i) {return s[i];}
-	element operator[](int i) const {return i<(int)siz?s[i]: (type()==typei?0:0.0);}
+	element operator[](int i) const {return i<(int)siz?s[i]: (type()==typei?element((int)0):element(0.0));}
 
 	explicit poly(int length=0);
 	poly(const initializer_list<int> &S);
@@ -48,7 +48,9 @@ public:
 
 	poly operator-(void) const;
 
-	friend poly operator*(const poly &A, const poly &B);
+	friend poly operator * (const poly &A, const poly &B);
+	friend poly operator / (const poly &A, const poly &B); 
+	friend poly operator % (const poly &A, const poly &B); 
 };
 
 bool operator==(const poly &A, const poly &B);
@@ -56,8 +58,8 @@ bool operator==(const poly &A, const poly &B);
 poly operator + (const poly &A, const poly &B);
 poly operator - (const poly &A, const poly &B);
 poly operator * (const poly &A, const poly &B);
-poly operator / (const poly &A, const poly &B); //TODO
-poly operator % (const poly &A, const poly &B); //TODO
+poly operator / (const poly &A, const poly &B); 
+poly operator % (const poly &A, const poly &B);
 poly operator ^ (const poly &A, int exp);
 
 ostream &operator<<(ostream &os, const poly &A);

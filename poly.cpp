@@ -1,5 +1,6 @@
 #include "poly.h"
 #include "polyvar.h"
+#include "polymath.h"
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -174,10 +175,35 @@ poly operator * (const poly &A,const poly &B)
 
 	return C;
 }
-poly operator / (const poly &A, const poly &B) //TODO
+poly operator / (const poly &A, const poly &B) 
 {
+	if(A.size()<B.size()) return {0};
+	
+	polyvar &x = polyvar::x;
+
+	int n = A.size(), m = B.size(), d = n-m+1;
+
+	poly a=A, b=B;
+	std::reverse(a.s,a.s+a.siz);
+	std::reverse(b.s,b.s+b.siz);
+	a=a%(x^d);
+	b=b%(x^d);
+
+	//printf("AA\n");
+
+	polycalc calc(d);
+
+	//cout<<calc.inv(b)<<endl;
+
+	poly ret = a*calc.inv(b) % (x^d);
+
+	//printf("AA\n");
+
+	std::reverse(ret.s,ret.s+ret.siz);
+
+	return ret;
 }
-poly operator % (const poly &A, const poly &B) //TODO
+poly operator % (const poly &A, const poly &B) 
 {
 	if(B == (polyvar::x ^ (B.size()-1)))
 	{
@@ -186,6 +212,10 @@ poly operator % (const poly &A, const poly &B) //TODO
 			C[i]=A[i];
 		return C;
 	}
+
+	poly ret=A-(A/B)*B;
+	if(B.size()>1)ret.siz=B.size()-1;
+	return ret;
 }
 poly operator ^ (const poly &A,int exp)
 {
