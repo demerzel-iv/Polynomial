@@ -11,14 +11,22 @@ lib: $(codes)
 staticlib: $(objects)
 	ar -crv libpoly.a $(objects)
 
-Int.o: Int.h temps.h
-Double.o: Double.h temps.h
-Image.o: Image.h temps.h Imaginary.h
-element.o: element.h Int.h Double.h Image.h Imaginary.h
-Imaginary.o: Imaginary.h
-polymath.o: polymath.h poly.h
-poly.o:  poly.h element.h
-polyvar.o: polyvar.h poly.h
+Int.o: Int.cpp Int.h temps.h
+	$(CompOpt) $< -o $@ -c
+Double.o: Double.cpp Double.h temps.h
+	$(CompOpt) $< -o $@ -c
+Image.o: Image.cpp Image.h temps.h Imaginary.h
+	$(CompOpt) $< -o $@ -c
+element.o: element.cpp element.h Int.h Double.h Image.h Imaginary.h
+	$(CompOpt) $< -o $@ -c
+Imaginary.o: Imaginary.cpp Imaginary.h
+	$(CompOpt) $< -o $@ -c
+polymath.o: polymath.cpp polymath.h poly.h
+	$(CompOpt) $< -o $@ -c
+poly.o: poly.cpp  poly.h element.h
+	$(CompOpt) $< -o $@ -c
+polyvar.o: polyvar.cpp polyvar.h poly.h
+	$(CompOpt) $< -o $@ -c
 
 clean: 
 	rm $(objects)
