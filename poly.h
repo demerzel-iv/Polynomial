@@ -70,6 +70,7 @@ poly operator - (const poly &A,const element &x);
 poly operator - (const element &x,const poly &A);
 poly operator * (const poly &A, const element &x);
 poly operator * (const element &x, const poly &A);
+poly operator / (const poly &A, const element &x);
 
 poly operator + (const poly &A,const int &x);
 poly operator + (const int &x,const poly &A);
@@ -77,6 +78,7 @@ poly operator - (const poly &A,const int &x);
 poly operator - (const int &x,const poly &A);
 poly operator * (const poly &A,const int &x);
 poly operator * (const int &x,const poly &A);
+poly operator / (const poly &A,const int &x);
 
 poly operator + (const poly &A,const double &x);
 poly operator + (const double &x,const poly &A);
@@ -84,6 +86,7 @@ poly operator - (const poly &A,const double &x);
 poly operator - (const double &x,const poly &A);
 poly operator * (const poly &A,const double &x);
 poly operator * (const double &x,const poly &A);
+poly operator / (const poly &A,const double &x);
 
 bool operator < (const poly &A,const poly &B) = delete; 
 bool operator > (const poly &A,const poly &B) = delete;

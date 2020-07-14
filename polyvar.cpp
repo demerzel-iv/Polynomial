@@ -33,15 +33,16 @@ ostream& operator << (ostream &os, const polyFormatOutputer &pfo)
     {
         if(pfo[i]==0) continue;
 
-        if(!first && pfo[i]>0) cout<<"+";
+        if(!first && pfo[i]>0) os<<"+";
         first=0;
 
-        if(i==0 || pfo[i]!=1)cout<<pfo[i]; 
+        if(i==0 || pfo[i]!=1)os<<pfo[i]; 
 
-        if(i!=0)cout<<"x";
-        if(i>1)cout<<"^"<<i;
+        if(i!=0)os<<"x";
+        if(i>1)os<<"^"<<i;
 
     }
+    if(first) os<<"0";
     return os;
 }
 polyFormatOutputer format(const poly &A)

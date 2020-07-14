@@ -177,6 +177,8 @@ poly operator * (const poly &A,const poly &B)
 }
 poly operator / (const poly &A, const poly &B) 
 {
+	if(A.type()!=B.type())return (A*1.0)/(B*1.0);
+
 	if(A.size()<B.size()) return {0};
 	
 	polyvar &x = polyvar::x;
@@ -189,16 +191,9 @@ poly operator / (const poly &A, const poly &B)
 	a=a%(x^d);
 	b=b%(x^d);
 
-	//printf("AA\n");
-
 	polycalc calc(d);
 
-	//cout<<calc.inv(b)<<endl;
-
 	poly ret = a*calc.inv(b) % (x^d);
-
-	//printf("AA\n");
-
 	std::reverse(ret.s,ret.s+ret.siz);
 
 	return ret;
@@ -287,3 +282,13 @@ ostream& operator << (ostream& os,const poly &A)
 		os<<A[i]<<" ";
 	return os;
 }
+
+poly operator / (const poly &A,const element &x)
+{
+	poly B(A.size());
+	for(int i=0;i<A.size();i++)
+		B[i]=A[i]/x;
+	return B;
+}
+poly operator / (const poly &A,const int &x) { return A/element(x); }
+poly operator / (const poly &A,const double &x) { return A/element(x); }

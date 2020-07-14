@@ -21,11 +21,11 @@ int main()
 	polyvar& x = polyvar::x;
 	polycalc calc(10);
 
-	poly A = x^20, B = x-2;
+	poly A = {1.0,2.0,3.0};
+	poly B = {1,2,3};
 
-
-	cout<< format(A / B) <<endl;
-	cout<< format(A % B) << endl;
+	cout<<A/2<<endl;
+	cout<<B/2<<endl;
 
 	return 0;
 }
