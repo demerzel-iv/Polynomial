@@ -1,4 +1,4 @@
-heads="Imaginary.h Int.h Double.h Image.h element.h poly.h polymath.h polyvar.h polynomial.h"
+heads="Imaginary.h Int.h Double.h Image.h element.h poly.h polymath.h polyvar.h polynomial.h temps.h"
 hpath=`pwd`
 
 make lib
