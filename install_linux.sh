@@ -15,7 +15,7 @@ cp $heads /usr/include/poly
 
 cd /etc
 
-if [[ $CPLUS_INCLUDE_PATH == *"/usr/include/poly"* ]] && [[ $LD_LIBRARY_PATH == *"/usr/lib/poly"* ]] && [[ $LIBRARY_PATH == *"/usr/lib/poly"* ]] ; 
+if [[ $CPLUS_INCLUDE_PATH == *"/usr/include/poly"* ]] || [[ $LD_LIBRARY_PATH == *"/usr/lib/poly"* ]] || [[ $LIBRARY_PATH == *"/usr/lib/poly"* ]] ; 
 then 
     flag=1
 else 
